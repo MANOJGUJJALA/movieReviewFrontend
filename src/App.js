@@ -10,18 +10,21 @@ import Home from './components/Home/Home';
 import Header from './components/Header/header';
 import Trailer from './components/Trailer/Trailer';
 import Reviews from './components/Reviews/Reviews';
+import axios from 'axios';
 
 function App() {
   const [movies,setMovies]=useState();
   const [movie,setMovie]=useState();
-  const [reviews,setReviews]=useState()
+  const [reviews,setReviews]=useState([])
   console.log(movies);
   
+  let url="https://c701-2405-201-c049-7091-688c-48d6-9c7-d239.ngrok-free.app/api/v1/movies"
   const getMovies=async()=>{
 
     try
     {
-      let url="https://378f-2405-201-c049-7091-2cdf-6ec7-b15b-9e45.ngrok-free.app/api/v1/movies"
+   // let url="https://378f-2405-201-c049-7091-2cdf-6ec7-b15b-9e45.ngrok-free.app/api/v1/movies"
+      // let u="http://localhost:8080/api/v1/movies"
       console.log("--------------");
       const response = await api.get(url);
       setMovies(response.data);
@@ -40,13 +43,15 @@ function App() {
      
     try 
     {
-        const response = await api.get(`/api/v1/movies/${movieId}`);
+    
+      console.log("&&",url+`/${movieId}`);
+        const response = await api.get(url+`/${movieId}`);
 
         const singleMovie = response.data;
 
         setMovie(singleMovie);
-
-        setReviews(singleMovie.reviews);
+      
+        setReviews(singleMovie.reviewIds);
         
 
     } 

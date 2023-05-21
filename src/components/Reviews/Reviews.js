@@ -23,8 +23,9 @@ const Reviews = ({getMovieData,movie,reviews,setReviews}) => {
 
         try
         {
-            const response = await api.post("/api/v1/reviews",{reviewBody:rev.value,imdbId:movieId});
-
+            let url="https://c701-2405-201-c049-7091-688c-48d6-9c7-d239.ngrok-free.app/api/v1/reviews"
+            const response = await api.post(url,{reviewBody:rev.value,imdbId:movieId});
+            console.log("^^^",reviews);
             const updatedReviews = [...reviews, {body:rev.value}];
     
             rev.value = "";
